@@ -2,7 +2,29 @@
 
 ## Quick Start
 
-### Production Build
+### Prebuilt Container (Recommended)
+Use the prebuilt container from GitHub Container Registry:
+
+```bash
+# Pull and run the latest version
+docker-compose -f docker-compose.prod.yml up -d
+
+# View logs
+docker-compose -f docker-compose.prod.yml logs -f
+
+# Stop
+docker-compose -f docker-compose.prod.yml down
+
+# Update to latest version
+docker-compose -f docker-compose.prod.yml pull
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+Access the game at: http://localhost:3000
+
+The container is automatically built and published to `ghcr.io/slmingol/cojakeons-plus:latest` on every push to main via GitHub Actions.
+
+### Production Build from Source
 Build and run the production version with nginx:
 
 ```bash
