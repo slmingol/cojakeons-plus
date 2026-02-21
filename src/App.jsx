@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import puzzlesData from './puzzles.json';
+import packageJson from '../package.json';
 
 const MAX_MISTAKES = 4;
 
@@ -320,7 +321,7 @@ function App() {
       </main>
 
       <footer className="footer">
-        <p>A Connections game clone © 2026</p>
+        <p>Cojakeons+ v{packageJson.version} © 2026</p>
       </footer>
     </div>
   );
