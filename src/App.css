@@ -232,11 +232,8 @@
 }
 
 .mistakes-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  text-align: center;
   margin-bottom: 1rem;
-  padding: 0 1rem;
 }
 
 .mistakes {
@@ -246,16 +243,14 @@
 }
 
 .control-button.reveal-solution {
-  background-color: #5a594e;
+  background-color: #8b8a7e;
   color: white;
-  border-color: #5a594e;
-  padding: 0.5rem 1rem;
-  font-size: 0.85rem;
+  border-color: #8b8a7e;
 }
 
 .control-button.reveal-solution:hover {
-  background-color: #000;
-  border-color: #000;
+  background-color: #5a594e;
+  border-color: #5a594e;
 }
 
 .puzzle-navigation {
