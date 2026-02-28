@@ -247,14 +247,24 @@
   gap: 1rem;
 }
 
-.mistakes {
-  font-size: 1rem;
-  color: #5a594e;
-  font-weight: 600;
-  margin: 0;
-  padding: 0;
-  text-align: center;
+.mistakes-dots {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
   grid-column: 2;
+}
+
+.mistake-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #5a594e;
+  transition: background-color 0.3s ease;
+}
+
+.mistake-dot.used {
+  background-color: #d4d4d4;
 }
 
 .stats-button-inline {

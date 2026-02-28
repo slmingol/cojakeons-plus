@@ -307,9 +307,14 @@ function App() {
         {/* Mistakes indicator and Stats button */}
         {!gameOver && (
           <div className="bottom-info-row">
-            <p className="mistakes">
-              Mistakes Remaining: {MAX_MISTAKES - mistakes}
-            </p>
+            <div className="mistakes-dots">
+              {[...Array(MAX_MISTAKES)].map((_, index) => (
+                <div 
+                  key={index}
+                  className={`mistake-dot ${index < mistakes ? 'used' : ''}`}
+                />
+              ))}
+            </div>
             <button 
               onClick={() => setShowStats(true)}
               className="stats-button-inline"
