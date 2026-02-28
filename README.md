@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="public/logo.png" alt="Conjakeions+ Logo" width="200"/>
+</div>
+
 # Conjakeions+
 
 A word puzzle game with 915+ unique puzzles inspired by Connections.

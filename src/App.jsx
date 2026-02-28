@@ -283,7 +283,10 @@ function App() {
         </div>
       )}
       <header className="header">
-        <h1>Conjakeions+</h1>
+        <div className="header-title">
+          <img src="/logo.png" alt="Conjakeions+ Logo" className="logo" />
+          <h1>Conjakeions+</h1>
+        </div>
         <p className="current-date">
           {new Date().toLocaleDateString('en-US', { 
             weekday: 'long', 
