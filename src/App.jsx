@@ -54,6 +54,11 @@ function App() {
     if (mistakes >= MAX_MISTAKES) {
       setGameOver(true);
       setMessage('Game Over! Better luck next time.');
+      // Reveal all unsolved categories
+      const unsolvedCategories = PUZZLE_DATA.filter(
+        cat => !solved.some(s => s.category === cat.category)
+      );
+      setSolved([...solved, ...unsolvedCategories.map(cat => ({ ...cat, revealed: true }))]);
     }
   }, [mistakes]);
 
@@ -237,7 +242,7 @@ function App() {
         {solved.map((cat, idx) => (
           <div 
             key={idx}
-            className="solved-category"
+            className={`solved-category ${cat.revealed ? 'revealed' : ''}`}
             style={{ backgroundColor: cat.color }}
           >
             <div className="category-name">{cat.category}</div>
