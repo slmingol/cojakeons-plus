@@ -9,7 +9,7 @@ on:
       days_old:
         description: 'Delete artifacts older than this many days'
         required: false
-        default: '30'
+        default: '7'
         type: number
       dry_run:
         description: 'Dry run (do not actually delete)'
@@ -34,8 +34,8 @@ jobs:
         with:
           token: ${{ github.token }}
           repository: ${{ github.repository }}
-          retain_days: ${{ inputs.days_old || 30 }}
-          keep_minimum_runs: 10
+          retain_days: ${{ inputs.days_old || 7 }}
+          keep_minimum_runs: 3
 
   cleanup-artifacts:
     runs-on: ubuntu-latest
@@ -47,8 +47,8 @@ jobs:
       - name: Cleanup old artifacts
         uses: c-hive/gha-remove-artifacts@v1
         with:
-          age: '${{ inputs.days_old || 30 }} days'
-          skip-recent: 5
+          age: '${{ inputs.days_old || 7 }} days'
+          skip-recent: 3
 
   cleanup-docker-images:
     runs-on: ubuntu-latest
@@ -62,7 +62,7 @@ jobs:
         with:
           package-name: 'cojakeons-plus'
           package-type: 'container'
-          min-versions-to-keep: 10
+          min-versions-to-keep: 5
           delete-only-untagged-versions: false
           token: ${{ secrets.GITHUB_TOKEN }}
 

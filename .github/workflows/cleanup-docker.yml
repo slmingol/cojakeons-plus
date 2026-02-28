@@ -9,7 +9,7 @@ on:
       keep_count:
         description: 'Minimum number of versions to keep'
         required: false
-        default: '10'
+        default: '5'
         type: number
       untagged_only:
         description: 'Delete only untagged versions'
@@ -34,7 +34,7 @@ jobs:
         with:
           package-name: 'cojakeons-plus'
           package-type: 'container'
-          min-versions-to-keep: ${{ inputs.keep_count || 10 }}
+          min-versions-to-keep: ${{ inputs.keep_count || 5 }}
           delete-only-untagged-versions: ${{ inputs.untagged_only || true }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -51,7 +51,7 @@ jobs:
         with:
           package-name: 'cojakeons-plus'
           package-type: 'container'
-          min-versions-to-keep: 5
+          min-versions-to-keep: 3
           delete-only-untagged-versions: false
           ignore-versions: '^(latest|v?\\d+\\.\\d+\\.\\d+)$'
           token: ${{ secrets.GITHUB_TOKEN }}
