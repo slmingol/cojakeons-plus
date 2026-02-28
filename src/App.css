@@ -60,6 +60,13 @@
   letter-spacing: 0.02em;
 }
 
+.current-date {
+  font-size: 0.95rem;
+  color: #5a594e;
+  margin: 0.25rem 0 0.5rem;
+  font-weight: 500;
+}
+
 .subtitle {
   font-size: 1rem;
   color: #5a594e;

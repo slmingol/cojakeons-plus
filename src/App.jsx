@@ -230,6 +230,14 @@ function App() {
       )}
       <header className="header">
         <h1>Conjakeions+</h1>
+        <p className="current-date">
+          {new Date().toLocaleDateString('en-US', { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          })}
+        </p>
         <p className="subtitle">
           Create four groups of four! 
           <span className="puzzle-info-inline">
