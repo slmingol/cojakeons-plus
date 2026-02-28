@@ -289,6 +289,15 @@ function App() {
           ))}
         </div>
 
+        {/* Mistakes indicator */}
+        {!gameOver && (
+          <div className="mistakes-container">
+            <div className="mistakes">
+              Mistakes Remaining: {MAX_MISTAKES - mistakes}
+            </div>
+          </div>
+        )}
+
         {/* Message */}
         {gameOver && message && (
           <div className={`message ${gameOver ? 'game-over' : ''}`}>
@@ -321,12 +330,9 @@ function App() {
           </div>
         )}
 
-        {/* Mistakes indicator */}
+        {/* Reveal Solution button */}
         {!gameOver && (
-          <div className="mistakes-container">
-            <div className="mistakes">
-              {mistakes} Incorrect
-            </div>
+          <div className="reveal-container">
             <button 
               onClick={handleRevealSolution}
               className="control-button reveal-solution"
