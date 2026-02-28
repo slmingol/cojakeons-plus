@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import puzzlesData from './puzzles.json';
 import packageJson from '../package.json';
+import { useVersionCheck } from './useVersionCheck';
 
 const MAX_MISTAKES = 4;
 
 function App() {
+  const { newVersionAvailable, reload } = useVersionCheck();
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
   const [puzzleNumberInput, setPuzzleNumberInput] = useState('');
   const [words, setWords] = useState([]);
@@ -203,6 +205,14 @@ function App() {
 
   return (
     <div className="App">
+      {newVersionAvailable && (
+        <div className="update-banner">
+          <span>A new version is available! </span>
+          <button onClick={reload} className="update-button">
+            Refresh to Update
+          </button>
+        </div>
+      )}
       <header className="header">
         <h1>Conjakeions+</h1>
         <p className="subtitle">
