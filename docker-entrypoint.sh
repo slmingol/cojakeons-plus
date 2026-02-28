@@ -5,7 +5,7 @@ set -e
 if [ -f /usr/share/nginx/html/version.txt ]; then
     VERSION=$(cat /usr/share/nginx/html/version.txt)
     echo "=========================================="
-    echo "🎮 Conjakeions+ v${VERSION}"
+    echo "🎮 Conjakeons+ v${VERSION}"
     echo "=========================================="
     echo "Starting nginx web server..."
     echo ""

@@ -229,7 +229,7 @@ function App() {
         </div>
       )}
       <header className="header">
-        <h1>Conjakeions+</h1>
+        <h1>Conjakeons+</h1>
         <p className="current-date">
           {new Date().toLocaleDateString('en-US', { 
             weekday: 'long', 
@@ -400,7 +400,7 @@ function App() {
       </main>
 
       <footer className="footer">
-        <p>Conjakeions+ v{packageJson.version} © 2026</p>
+        <p>Conjakeons+ v{packageJson.version} © 2026</p>
       </footer>
 
       {showStats && (
