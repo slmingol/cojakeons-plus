@@ -273,18 +273,15 @@
 }
 
 .mistakes-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-align: center;
   margin: 1.5rem 0 1rem;
-  width: 100%;
 }
 
 .mistakes {
   font-size: 1rem;
   color: #5a594e;
   font-weight: 600;
+  text-align: center;
 }
 
 .reveal-container {
