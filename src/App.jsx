@@ -274,12 +274,6 @@ function App() {
               Go
             </button>
           </form>
-          <button 
-            onClick={() => setShowStats(true)}
-            className="nav-button stats-button"
-          >
-            📊 Stats
-          </button>
         </div>
       </header>
 
@@ -382,6 +376,13 @@ function App() {
           </div>
         )}
       </main>
+
+      <button 
+        onClick={() => setShowStats(true)}
+        className="stats-button-fixed"
+      >
+        📊 Stats
+      </button>
 
       <footer className="footer">
         <p>Conjakeions+ v{packageJson.version} © 2026</p>

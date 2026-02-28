@@ -349,17 +349,6 @@
   padding: 0.5rem 1rem;
 }
 
-.nav-button.stats-button {
-  background-color: #5a594e;
-  color: white;
-  border-color: #5a594e;
-}
-
-.nav-button.stats-button:hover {
-  background-color: #4a4940;
-  border-color: #4a4940;
-}
-
 .game-over-controls {
   display: flex;
   gap: 1.5rem;
@@ -387,6 +376,30 @@
   color: #888;
   font-size: 0.75rem;
   z-index: 100;
+}
+
+.stats-button-fixed {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  background-color: #5a594e;
+  color: white;
+  border: 1px solid #5a594e;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  z-index: 100;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.stats-button-fixed:hover {
+  background-color: #4a4940;
+  border-color: #4a4940;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive design */
