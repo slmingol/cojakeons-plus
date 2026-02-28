@@ -304,12 +304,18 @@ function App() {
           ))}
         </div>
 
-        {/* Mistakes indicator */}
+        {/* Mistakes indicator and Stats button */}
         {!gameOver && (
-          <div className="mistakes-container">
+          <div className="bottom-info-row">
             <p className="mistakes">
               Mistakes Remaining: {MAX_MISTAKES - mistakes}
             </p>
+            <button 
+              onClick={() => setShowStats(true)}
+              className="stats-button-inline"
+            >
+              📊 Stats
+            </button>
           </div>
         )}
 
@@ -376,13 +382,6 @@ function App() {
           </div>
         )}
       </main>
-
-      <button 
-        onClick={() => setShowStats(true)}
-        className="stats-button-fixed"
-      >
-        📊 Stats
-      </button>
 
       <footer className="footer">
         <p>Conjakeions+ v{packageJson.version} © 2026</p>
