@@ -475,6 +475,18 @@ function App() {
             if (window.confirm('Are you sure you want to reset all statistics? This cannot be undone.')) {
               resetStats();
               resetHistory();
+              clearState();
+              // Reset current game state
+              setCurrentPuzzleIndex(0);
+              setMistakes(0);
+              setSolved([]);
+              setSelected([]);
+              setGameOver(false);
+              setMessage('');
+              setRevealed(false);
+              setStatsRecorded(false);
+              setPuzzleAttemptRecorded(false);
+              setShowStats(false);
             }
           }}
         />
