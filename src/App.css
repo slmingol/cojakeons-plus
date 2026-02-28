@@ -127,7 +127,7 @@
 }
 
 .word-button {
-  aspect-ratio: 1.5 / 1;
+  aspect-ratio: 2 / 1;
   border: none;
   border-radius: 4px;
   background-color: #efefe6;
@@ -147,7 +147,7 @@
   color: #000;
   box-shadow: none;
   line-height: 1.2;
-  min-height: 80px;
+  min-height: 60px;
   margin: 0;
 }
 
