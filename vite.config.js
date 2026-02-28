@@ -6,7 +6,13 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    host: true
+    host: true,
+    hmr: {
+      overlay: true
+    },
+    watch: {
+      usePolling: true
+    }
   },
   build: {
     outDir: 'dist',
