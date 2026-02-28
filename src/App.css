@@ -399,11 +399,12 @@
 }
 
 .footer {
-  margin-top: auto;
-  text-align: center;
-  padding: 2rem 1rem 1rem;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
   color: #888;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
+  z-index: 100;
 }
 
 /* Responsive design */
