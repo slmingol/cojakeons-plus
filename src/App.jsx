@@ -3,11 +3,14 @@ import './App.css';
 import puzzlesData from './puzzles.json';
 import packageJson from '../package.json';
 import { useVersionCheck } from './useVersionCheck';
+import { useStats } from './useStats';
+import StatsModal from './StatsModal';
 
 const MAX_MISTAKES = 4;
 
 function App() {
   const { newVersionAvailable, reload } = useVersionCheck();
+  const { stats, recordWin, recordLoss, recordReveal, resetStats, getWinRate, getAverageMistakes } = useStats();
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
   const [puzzleNumberInput, setPuzzleNumberInput] = useState('');
   const [words, setWords] = useState([]);
@@ -17,6 +20,8 @@ function App() {
   const [gameOver, setGameOver] = useState(false);
   const [message, setMessage] = useState('');
   const [revealed, setRevealed] = useState(false);
+  const [showStats, setShowStats] = useState(false);
+  const [statsRecorded, setStatsRecorded] = useState(false);
   
   const currentPuzzle = puzzlesData[currentPuzzleIndex];
   const PUZZLE_DATA = currentPuzzle.categories.map(cat => ({
@@ -43,29 +48,34 @@ function App() {
     setGameOver(false);
     setMessage('');
     setRevealed(false);
+    setStatsRecorded(false);
   }, [currentPuzzleIndex]);
 
   // Check if game is won
   useEffect(() => {
     const actuallySolved = solved.filter(cat => !cat.revealed).length;
-    if (actuallySolved === PUZZLE_DATA.length) {
+    if (actuallySolved === PUZZLE_DATA.length && !statsRecorded) {
       setGameOver(true);
       setMessage('🎉 Congratulations! You won!');
+      recordWin(mistakes);
+      setStatsRecorded(true);
     }
-  }, [solved]);
+  }, [solved, statsRecorded]);
 
   // Check if game is lost
   useEffect(() => {
-    if (mistakes >= MAX_MISTAKES && !revealed) {
+    if (mistakes >= MAX_MISTAKES && !revealed && !statsRecorded) {
       setGameOver(true);
       setMessage('Game Over! Better luck next time.');
+      recordLoss(mistakes);
+      setStatsRecorded(true);
       // Reveal all unsolved categories
       const unsolvedCategories = PUZZLE_DATA.filter(
         cat => !solved.some(s => s.category === cat.category)
       );
       setSolved([...solved, ...unsolvedCategories.map(cat => ({ ...cat, revealed: true }))]);
     }
-  }, [mistakes]);
+  }, [mistakes, statsRecorded]);
 
   function shuffleArray(array) {
     const newArray = [...array];
@@ -181,9 +191,14 @@ function App() {
     setGameOver(false);
     setMessage('');
     setRevealed(false);
+    setStatsRecorded(false);
   }
 
   function handleRevealSolution() {
+    if (!statsRecorded) {
+      recordReveal(mistakes);
+      setStatsRecorded(true);
+    }
     setRevealed(true);
     setGameOver(true);
     setMessage('Solution revealed');
@@ -259,6 +274,12 @@ function App() {
               Go
             </button>
           </form>
+          <button 
+            onClick={() => setShowStats(true)}
+            className="nav-button stats-button"
+          >
+            📊 Stats
+          </button>
         </div>
       </header>
 
@@ -365,6 +386,20 @@ function App() {
       <footer className="footer">
         <p>Conjakeions+ v{packageJson.version} © 2026</p>
       </footer>
+
+      {showStats && (
+        <StatsModal 
+          stats={stats}
+          getWinRate={getWinRate}
+          getAverageMistakes={getAverageMistakes}
+          onClose={() => setShowStats(false)}
+          onReset={() => {
+            if (window.confirm('Are you sure you want to reset all statistics? This cannot be undone.')) {
+              resetStats();
+            }
+          }}
+        />
+      )}
     </div>
   );
 }

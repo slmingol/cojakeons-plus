@@ -349,6 +349,17 @@
   padding: 0.5rem 1rem;
 }
 
+.nav-button.stats-button {
+  background-color: #5a594e;
+  color: white;
+  border-color: #5a594e;
+}
+
+.nav-button.stats-button:hover {
+  background-color: #4a4940;
+  border-color: #4a4940;
+}
+
 .game-over-controls {
   display: flex;
   gap: 1.5rem;
