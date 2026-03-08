@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,7 +22,8 @@
 }
 
 .modal-content {
-  background-color: white;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
   border-radius: 12px;
   max-width: 500px;
   width: 90%;
@@ -48,14 +49,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  border-bottom: 2px solid #e0e0e0;
+  border-bottom: 2px solid var(--border-color);
 }
 
 .modal-header h2 {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #000;
+  color: var(--text-primary);
 }
 
 .close-button {
@@ -63,7 +64,7 @@
   border: none;
   font-size: 2rem;
   cursor: pointer;
-  color: #999;
+  color: var(--text-secondary);
   line-height: 1;
   padding: 0;
   width: 32px;
@@ -76,8 +77,8 @@
 }
 
 .close-button:hover {
-  background-color: #f0f0f0;
-  color: #000;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
 }
 
 .stats-grid {
@@ -85,7 +86,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   padding: 1.5rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .stat-item {
@@ -95,13 +96,13 @@
 .stat-value {
   font-size: 2rem;
   font-weight: 700;
-  color: #000;
+  color: var(--text-primary);
   margin-bottom: 0.25rem;
 }
 
 .stat-label {
   font-size: 0.75rem;
-  color: #666;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 600;
@@ -115,7 +116,7 @@
   display: flex;
   justify-content: space-between;
   padding: 0.75rem 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .detail-row:last-child {
@@ -124,12 +125,12 @@
 
 .detail-label {
   font-weight: 600;
-  color: #333;
+  color: var(--text-secondary);
 }
 
 .detail-value {
   font-weight: 700;
-  color: #000;
+  color: var(--text-primary);
 }
 
 .modal-actions {
@@ -138,7 +139,7 @@
 }
 
 .reset-stats-button {
-  background-color: #fff;
+  background-color: var(--bg-secondary);
   border: 2px solid #dc3545;
   border-radius: 24px;
   color: #dc3545;
@@ -156,15 +157,15 @@
 
 .puzzle-stats-section {
   padding: 1.5rem;
-  background-color: #f8f9fa;
-  border-top: 1px solid #e0e0e0;
+  background-color: var(--bg-tertiary);
+  border-top: 1px solid var(--border-color);
 }
 
 .puzzle-stats-section h3 {
   margin: 0 0 1rem 0;
   font-size: 1rem;
   font-weight: 700;
-  color: #000;
+  color: var(--text-primary);
   text-align: center;
 }
 

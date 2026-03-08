@@ -13,13 +13,7 @@ const loadGameState = () => {
   try {
     const stored = localStorage.getItem(GAME_STATE_KEY);
     if (stored) {
-      const state = JSON.parse(stored);
-      // Check if saved state is recent (within 24 hours)
-      const savedTime = state.savedAt || 0;
-      const hoursSince = (Date.now() - savedTime) / (1000 * 60 * 60);
-      if (hoursSince < 24) {
-        return state;
-      }
+      return JSON.parse(stored);
     }
   } catch (error) {
     console.error('Error loading game state:', error);
@@ -45,6 +39,20 @@ const clearGameState = () => {
   } catch (error) {
     console.error('Error clearing game state:', error);
   }
+};
+
+export const hasSavedGame = () => {
+  try {
+    const stored = localStorage.getItem(GAME_STATE_KEY);
+    if (stored) {
+      const state = JSON.parse(stored);
+      // Check if it has meaningful progress
+      return (state.solved && state.solved.length > 0) || state.mistakes > 0;
+    }
+  } catch (error) {
+    console.error('Error checking saved game:', error);
+  }
+  return false;
 };
 
 export const useGameState = () => {

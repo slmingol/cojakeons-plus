@@ -6,6 +6,8 @@ import { useVersionCheck } from './useVersionCheck';
 import { useStats } from './useStats';
 import { useGameState } from './useGameState';
 import { usePuzzleHistory } from './usePuzzleHistory';
+import { useTheme } from './useTheme';
+import { useDailyPuzzle } from './useDailyPuzzle';
 import StatsModal from './StatsModal';
 
 const MAX_MISTAKES = 4;
@@ -15,7 +17,15 @@ function App() {
   const { stats, recordWin, recordLoss, recordReveal, resetStats, getWinRate, getAverageMistakes } = useStats();
   const { savedState, saveState, clearState } = useGameState();
   const { recordAttempt, recordCompletion, getPuzzleStats, hasPlayedBefore, hasWonBefore, getTotalPuzzlesAttempted, getTotalPuzzlesWon, resetHistory } = usePuzzleHistory();
-  const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(savedState.currentPuzzleIndex);
+  const { theme, setTheme } = useTheme();
+  const { dailyPuzzleIndex, isPlayingDaily, returnToDaily, setBrowseMode } = useDailyPuzzle(puzzlesData.length);
+  
+  // Initialize with daily puzzle if no saved state, otherwise use saved state
+  const initialPuzzleIndex = savedState.currentPuzzleIndex !== 0 || savedState.solved.length > 0 || savedState.mistakes > 0
+    ? savedState.currentPuzzleIndex
+    : dailyPuzzleIndex;
+  
+  const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(initialPuzzleIndex);
   const [puzzleNumberInput, setPuzzleNumberInput] = useState('');
   const [words, setWords] = useState([]);
   const [selected, setSelected] = useState([]);
@@ -25,6 +35,7 @@ function App() {
   const [message, setMessage] = useState('');
   const [revealed, setRevealed] = useState(savedState.revealed);
   const [showStats, setShowStats] = useState(false);
+  const [showAdmin, setShowAdmin] = useState(false);
   const [statsRecorded, setStatsRecorded] = useState(false);
   const [puzzleAttemptRecorded, setPuzzleAttemptRecorded] = useState(false);
   
@@ -57,6 +68,11 @@ function App() {
       setWords(shuffleArray(allWords));
       // solved and mistakes are already set from savedState in initial state
       setPuzzleAttemptRecorded(false); // Allow recording attempt for resumed game
+      setMessage('♻️ Resuming saved game...');
+      // Clear the resume message after 3 seconds
+      setTimeout(() => {
+        setMessage('');
+      }, 3000);
     } else {
       // Start fresh
       setWords(shuffleArray(allWords));
@@ -207,6 +223,7 @@ function App() {
   function handlePrevPuzzle() {
     if (currentPuzzleIndex > 0) {
       clearState(); // Clear saved state when manually changing puzzles
+      setBrowseMode(); // Switch to browse mode
       setCurrentPuzzleIndex(currentPuzzleIndex - 1);
     }
   }
@@ -214,12 +231,14 @@ function App() {
   function handleNextPuzzle() {
     if (currentPuzzleIndex < puzzlesData.length - 1) {
       clearState(); // Clear saved state when manually changing puzzles
+      setBrowseMode(); // Switch to browse mode
       setCurrentPuzzleIndex(currentPuzzleIndex + 1);
     }
   }
 
   function handleRandomPuzzle() {
     clearState(); // Clear saved state when manually changing puzzles
+    setBrowseMode(); // Switch to browse mode
     const randomIndex = Math.floor(Math.random() * puzzlesData.length);
     setCurrentPuzzleIndex(randomIndex);
   }
@@ -267,9 +286,16 @@ function App() {
     const puzzleNum = parseInt(puzzleNumberInput);
     if (!isNaN(puzzleNum) && puzzleNum >= 1 && puzzleNum <= puzzlesData.length) {
       clearState(); // Clear saved state when jumping to a new puzzle
+      setBrowseMode(); // Switch to browse mode
       setCurrentPuzzleIndex(puzzleNum - 1);
       setPuzzleNumberInput('');
     }
+  }
+
+  function handleReturnToDaily() {
+    clearState();
+    const dailyIndex = returnToDaily();
+    setCurrentPuzzleIndex(dailyIndex);
   }
 
   return (
@@ -294,6 +320,19 @@ function App() {
             month: 'long', 
             day: 'numeric' 
           })}
+          {isPlayingDaily ? (
+            <span className="daily-badge">📅 Today's Daily Puzzle</span>
+          ) : (
+            <span className="browse-badge">
+              📚 Browse Mode
+              <button 
+                onClick={handleReturnToDaily}
+                className="return-daily-link"
+              >
+                Return to Today's Puzzle
+              </button>
+            </span>
+          )}
         </p>
         <p className="subtitle">
           Create four groups of four! 
@@ -375,9 +414,16 @@ function App() {
           ))}
         </div>
 
-        {/* Mistakes indicator and Stats button */}
+        {/* Mistakes indicator, Admin and Stats buttons */}
         {!gameOver && (
           <div className="bottom-info-row">
+            <button 
+              onClick={() => setShowAdmin(true)}
+              className="admin-button-inline"
+              title="Admin Options"
+            >
+              ⚙️ Admin
+            </button>
             <div className="mistakes-display">
               <span className="mistakes-label">Mistakes Remaining:</span>
               <div className="mistakes-dots">
@@ -493,6 +539,107 @@ function App() {
             }
           }}
         />
+      )}
+
+      {showAdmin && (
+        <div className="modal-overlay" onClick={() => setShowAdmin(false)}>
+          <div className="modal-content admin-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowAdmin(false)}>
+              ✕
+            </button>
+            <h2>⚙️ Admin Options</h2>
+            <div className="admin-options">
+              <div className="admin-option">
+                <h3>🎨 Theme</h3>
+                <p>Choose your preferred color scheme</p>
+                <div className="theme-controls">
+                  <button 
+                    className={`theme-button ${theme === 'light' ? 'active' : ''}`}
+                    onClick={() => setTheme('light')}
+                  >
+                    ☀️ Light
+                  </button>
+                  <button 
+                    className={`theme-button ${theme === 'dark' ? 'active' : ''}`}
+                    onClick={() => setTheme('dark')}
+                  >
+                    🌙 Dark
+                  </button>
+                  <button 
+                    className={`theme-button ${theme === 'system' ? 'active' : ''}`}
+                    onClick={() => setTheme('system')}
+                  >
+                    💻 System
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Danger Zone */}
+            <div className="danger-zone">
+              <h3 className="danger-zone-title">⚠️ Danger Zone</h3>
+              <p className="danger-zone-description">
+                These actions are permanent and cannot be undone
+              </p>
+              
+              <div className="danger-zone-options">
+                <div className="danger-option">
+                  <div className="danger-option-content">
+                    <h4>Clear Saved Game</h4>
+                    <p>Remove any saved progress for the current puzzle</p>
+                  </div>
+                  <button 
+                    className="danger-action-button"
+                    onClick={() => {
+                      if (window.confirm('Clear your saved game progress? You will start the current puzzle fresh.')) {
+                        clearState();
+                        // Reset current puzzle to fresh state
+                        handleResetPuzzle();
+                        setShowAdmin(false);
+                        setMessage('✓ Saved game cleared');
+                        setTimeout(() => setMessage(''), 3000);
+                      }
+                    }}
+                  >
+                    Clear Game
+                  </button>
+                </div>
+                
+                <div className="danger-option">
+                  <div className="danger-option-content">
+                    <h4>Reset All Data</h4>
+                    <p>Clear all statistics, history, and saved games</p>
+                  </div>
+                  <button 
+                    className="danger-action-button severe"
+                    onClick={() => {
+                      if (window.confirm('Are you sure you want to reset ALL data? This includes statistics, puzzle history, and saved games. This cannot be undone.')) {
+                        resetStats();
+                        resetHistory();
+                        clearState();
+                        // Reset to initial state
+                        setCurrentPuzzleIndex(0);
+                        setMistakes(0);
+                        setSolved([]);
+                        setSelected([]);
+                        setGameOver(false);
+                        setMessage('');
+                        setRevealed(false);
+                        setStatsRecorded(false);
+                        setPuzzleAttemptRecorded(false);
+                        setShowAdmin(false);
+                        setMessage('✓ All data reset');
+                        setTimeout(() => setMessage(''), 3000);
+                      }
+                    }}
+                  >
+                    Reset All
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

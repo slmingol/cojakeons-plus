@@ -45748,5 +45748,603 @@
         "color": "#f9df6d"
       }
     ]
+  },
+  {
+    "categories": [
+      {
+        "category": "CATEGORY 1 - Play puzzle to discover",
+        "words": [
+          "REDDIT",
+          "TERMINOLOGY",
+          "FLAIR",
+          "MODERATOR"
+        ],
+        "difficulty": 1
+      },
+      {
+        "category": "CATEGORY 2 - Play puzzle to discover",
+        "words": [
+          "SUBREDDIT",
+          "THREAD",
+          "SCIENTIFIC",
+          "UNITS"
+        ],
+        "difficulty": 2
+      },
+      {
+        "category": "CATEGORY 3 - Play puzzle to discover",
+        "words": [
+          "NEWTON",
+          "PASCAL",
+          "TESLA",
+          "WATT"
+        ],
+        "difficulty": 3
+      },
+      {
+        "category": "CATEGORY 4 - Play puzzle to discover",
+        "words": [
+          "HISTORICAL",
+          "FIGURES",
+          "BISMARCK",
+          "CLEOPATRA"
+        ],
+        "difficulty": 4
+      }
+    ],
+    "source": "Community puzzle: Reddit-related words",
+    "date": "2026-03-08"
+  },
+  {
+    "categories": [
+      {
+        "category": "CATEGORY 1 - Play puzzle to discover",
+        "words": [
+          "LANGUAGES",
+          "JAVASCRIPT",
+          "LISP",
+          "PYTHON"
+        ],
+        "difficulty": 1
+      },
+      {
+        "category": "CATEGORY 2 - Play puzzle to discover",
+        "words": [
+          "RUST",
+          "HISTORY",
+          "COMPUTING",
+          "BABBAGE"
+        ],
+        "difficulty": 2
+      },
+      {
+        "category": "CATEGORY 3 - Play puzzle to discover",
+        "words": [
+          "COLOSSUS",
+          "ENIAC",
+          "LOVELACE",
+          "NLP"
+        ],
+        "difficulty": 3
+      },
+      {
+        "category": "CATEGORY 4 - Play puzzle to discover",
+        "words": [
+          "TECHNIQUES",
+          "LEMMATIZATION",
+          "POS",
+          "TAGGING"
+        ],
+        "difficulty": 4
+      }
+    ],
+    "source": "Community puzzle: ChatGPT-related words",
+    "date": "2026-03-08"
+  },
+  {
+    "categories": [
+      {
+        "category": "CATEGORY 1 - Play puzzle to discover",
+        "words": [
+          "TREE",
+          "TERMS",
+          "BARK",
+          "LEAF"
+        ],
+        "difficulty": 1
+      },
+      {
+        "category": "CATEGORY 2 - Play puzzle to discover",
+        "words": [
+          "ROOT",
+          "TWIG",
+          "MUSICAL",
+          "JAM"
+        ],
+        "difficulty": 2
+      },
+      {
+        "category": "CATEGORY 3 - Play puzzle to discover",
+        "words": [
+          "NOTE",
+          "REST",
+          "SCALE",
+          "DIRECTIONS"
+        ],
+        "difficulty": 3
+      },
+      {
+        "category": "CATEGORY 4 - Play puzzle to discover",
+        "words": [
+          "DOWN",
+          "LEFT",
+          "RIGHT",
+          "SPORTS"
+        ],
+        "difficulty": 4
+      }
+    ],
+    "source": "Community puzzle: Multiple meanings puzzle",
+    "date": "2026-03-08"
+  },
+  {
+    "categories": [
+      {
+        "category": "CATEGORY 1 - Play puzzle to discover",
+        "words": [
+          "SPACE",
+          "EVENTS",
+          "COMET",
+          "ECLIPSE"
+        ],
+        "difficulty": 1
+      },
+      {
+        "category": "CATEGORY 2 - Play puzzle to discover",
+        "words": [
+          "EQUINOX",
+          "METEOR",
+          "TRANSPORTATION",
+          "MODES"
+        ],
+        "difficulty": 2
+      },
+      {
+        "category": "CATEGORY 3 - Play puzzle to discover",
+        "words": [
+          "BICYCLE",
+          "PLANE",
+          "SHIP",
+          "TRAIN"
+        ],
+        "difficulty": 3
+      },
+      {
+        "category": "CATEGORY 4 - Play puzzle to discover",
+        "words": [
+          "NATURE",
+          "SOUNDS",
+          "BARK",
+          "CHIRP"
+        ],
+        "difficulty": 4
+      }
+    ],
+    "source": "Community puzzle: Science and nature",
+    "date": "2026-03-08"
+  },
+  {
+    "categories": [
+      {
+        "category": "CATEGORY 1 - Play puzzle to discover",
+        "words": [
+          "DIRECTIONS",
+          "EAST",
+          "NORTH",
+          "SOUTH"
+        ],
+        "difficulty": 1
+      },
+      {
+        "category": "CATEGORY 2 - Play puzzle to discover",
+        "words": [
+          "WEST",
+          "FORMS",
+          "CURRENCY",
+          "DOLLAR"
+        ],
+        "difficulty": 2
+      },
+      {
+        "category": "CATEGORY 3 - Play puzzle to discover",
+        "words": [
+          "EURO",
+          "RUPEE",
+          "YEN",
+          "PLANTS"
+        ],
+        "difficulty": 3
+      },
+      {
+        "category": "CATEGORY 4 - Play puzzle to discover",
+        "words": [
+          "BIRCH",
+          "DAISY",
+          "MINT",
+          "ROSE"
+        ],
+        "difficulty": 4
+      }
+    ],
+    "source": "Community puzzle: Versatile words",
+    "date": "2026-03-08"
+  },
+  {
+    "categories": [
+      {
+        "category": "CATEGORY 1 - Play puzzle to discover",
+        "words": [
+          "MASKED",
+          "CRUSADERS",
+          "BATMAN",
+          "DEADPOOL"
+        ],
+        "difficulty": 1
+      },
+      {
+        "category": "CATEGORY 2 - Play puzzle to discover",
+        "words": [
+          "SPIDER",
+          "MAN",
+          "ZORRO",
+          "ANCIENT"
+        ],
+        "difficulty": 2
+      },
+      {
+        "category": "CATEGORY 3 - Play puzzle to discover",
+        "words": [
+          "WONDERS",
+          "COLOSSUS",
+          "HANGING",
+          "GARDENS"
+        ],
+        "difficulty": 3
+      },
+      {
+        "category": "CATEGORY 4 - Play puzzle to discover",
+        "words": [
+          "LIGHTHOUSE",
+          "PYRAMID",
+          "INTRIGUING",
+          "ISLANDS"
+        ],
+        "difficulty": 4
+      }
+    ],
+    "source": "Community puzzle: Fun puzzle #1",
+    "date": "2026-03-08"
+  },
+  {
+    "categories": [
+      {
+        "category": "CATEGORY 1 - Play puzzle to discover",
+        "words": [
+          "HISTORIC",
+          "EXPLORERS",
+          "COLUMBUS",
+          "EARHART"
+        ],
+        "difficulty": 1
+      },
+      {
+        "category": "CATEGORY 2 - Play puzzle to discover",
+        "words": [
+          "LIVINGSTONE",
+          "POLO",
+          "MUSICAL",
+          "INSTRUMENTS"
+        ],
+        "difficulty": 2
+      },
+      {
+        "category": "CATEGORY 3 - Play puzzle to discover",
+        "words": [
+          "CLARINET",
+          "MARIMBA",
+          "SITAR",
+          "VIOLA"
+        ],
+        "difficulty": 3
+      },
+      {
+        "category": "CATEGORY 4 - Play puzzle to discover",
+        "words": [
+          "CIRCUS",
+          "ACTS",
+          "ACROBAT",
+          "CLOWN"
+        ],
+        "difficulty": 4
+      }
+    ],
+    "source": "Community puzzle: Fun puzzle #2",
+    "date": "2026-03-08"
+  },
+  {
+    "categories": [
+      {
+        "category": "CATEGORY 1 - Play puzzle to discover",
+        "words": [
+          "CLOCK",
+          "BRANDS",
+          "CITIZEN",
+          "ROLEX"
+        ],
+        "difficulty": 1
+      },
+      {
+        "category": "CATEGORY 2 - Play puzzle to discover",
+        "words": [
+          "SEIKO",
+          "TIMEX",
+          "CALCULATOR",
+          "CASIO"
+        ],
+        "difficulty": 2
+      },
+      {
+        "category": "CATEGORY 3 - Play puzzle to discover",
+        "words": [
+          "HEWLETT",
+          "PACKARD",
+          "SHARP",
+          "TEXAS"
+        ],
+        "difficulty": 3
+      },
+      {
+        "category": "CATEGORY 4 - Play puzzle to discover",
+        "words": [
+          "INSTRUMENTS",
+          "HISTORICAL",
+          "CONFLICTS",
+          "CRUSADES"
+        ],
+        "difficulty": 4
+      }
+    ],
+    "source": "Community puzzle: Red herrings #1",
+    "date": "2026-03-08"
+  },
+  {
+    "categories": [
+      {
+        "category": "CATEGORY 1 - Play puzzle to discover",
+        "words": [
+          "MOONS",
+          "JUPITER",
+          "CALLISTO",
+          "EUROPA"
+        ],
+        "difficulty": 1
+      },
+      {
+        "category": "CATEGORY 2 - Play puzzle to discover",
+        "words": [
+          "GANYMEDE",
+          "FAMOUS",
+          "INVENTORS",
+          "BELL"
+        ],
+        "difficulty": 2
+      },
+      {
+        "category": "CATEGORY 3 - Play puzzle to discover",
+        "words": [
+          "CURIE",
+          "EDISON",
+          "TESLA",
+          "MUSICAL"
+        ],
+        "difficulty": 3
+      },
+      {
+        "category": "CATEGORY 4 - Play puzzle to discover",
+        "words": [
+          "INSTRUMENTS",
+          "DRUM",
+          "HARP",
+          "OBOE"
+        ],
+        "difficulty": 4
+      }
+    ],
+    "source": "Community puzzle: Red herrings #2",
+    "date": "2026-03-08"
+  },
+  {
+    "categories": [
+      {
+        "category": "CATEGORY 1 - Play puzzle to discover",
+        "words": [
+          "PHYSICS",
+          "DISCOVERIES",
+          "FERMAT",
+          "LAST"
+        ],
+        "difficulty": 1
+      },
+      {
+        "category": "CATEGORY 2 - Play puzzle to discover",
+        "words": [
+          "THEOREM",
+          "HIGGS",
+          "BOSON",
+          "RELATIVITY"
+        ],
+        "difficulty": 2
+      },
+      {
+        "category": "CATEGORY 3 - Play puzzle to discover",
+        "words": [
+          "SCHR",
+          "DINGER",
+          "CAT",
+          "GENETIC"
+        ],
+        "difficulty": 3
+      },
+      {
+        "category": "CATEGORY 4 - Play puzzle to discover",
+        "words": [
+          "TERMINOLOGY",
+          "CODON",
+          "GENOME",
+          "HELIX"
+        ],
+        "difficulty": 4
+      }
+    ],
+    "source": "Community puzzle: Science-related",
+    "date": "2026-03-08"
+  },
+  {
+    "categories": [
+      {
+        "category": "CATEGORY 1 - Play puzzle to discover",
+        "words": [
+          "CROSSWORD",
+          "CLUES",
+          "ACROSS",
+          "CLUE"
+        ],
+        "difficulty": 1
+      },
+      {
+        "category": "CATEGORY 2 - Play puzzle to discover",
+        "words": [
+          "DOWN",
+          "GRID",
+          "CHESS",
+          "PIECES"
+        ],
+        "difficulty": 2
+      },
+      {
+        "category": "CATEGORY 3 - Play puzzle to discover",
+        "words": [
+          "BISHOP",
+          "KNIGHT",
+          "PAWN",
+          "QUEEN"
+        ],
+        "difficulty": 3
+      },
+      {
+        "category": "CATEGORY 4 - Play puzzle to discover",
+        "words": [
+          "SUDOKU",
+          "TERMINOLOGY",
+          "CELL",
+          "DIGIT"
+        ],
+        "difficulty": 4
+      }
+    ],
+    "source": "Community puzzle: Puzzle about puzzles",
+    "date": "2026-03-08"
+  },
+  {
+    "categories": [
+      {
+        "category": "CATEGORY 1 - Play puzzle to discover",
+        "words": [
+          "ASTRONOMICAL",
+          "TERMS",
+          "COMET",
+          "ECLIPSE"
+        ],
+        "difficulty": 1
+      },
+      {
+        "category": "CATEGORY 2 - Play puzzle to discover",
+        "words": [
+          "NEBULA",
+          "QUASAR",
+          "ROMAN",
+          "GODS"
+        ],
+        "difficulty": 2
+      },
+      {
+        "category": "CATEGORY 3 - Play puzzle to discover",
+        "words": [
+          "JUPITER",
+          "MERCURY",
+          "NEPTUNE",
+          "VENUS"
+        ],
+        "difficulty": 3
+      },
+      {
+        "category": "CATEGORY 4 - Play puzzle to discover",
+        "words": [
+          "SPACE",
+          "MISSIONS",
+          "APOLLO",
+          "GEMINI"
+        ],
+        "difficulty": 4
+      }
+    ],
+    "source": "Community puzzle: Very difficult #1",
+    "date": "2026-03-08"
+  },
+  {
+    "categories": [
+      {
+        "category": "CATEGORY 1 - Play puzzle to discover",
+        "words": [
+          "ASTRONOMICAL",
+          "TERMS",
+          "CERES",
+          "ERIS"
+        ],
+        "difficulty": 1
+      },
+      {
+        "category": "CATEGORY 2 - Play puzzle to discover",
+        "words": [
+          "HYPERION",
+          "QUASAR",
+          "MYTHOLOGICAL",
+          "FIGURES"
+        ],
+        "difficulty": 2
+      },
+      {
+        "category": "CATEGORY 3 - Play puzzle to discover",
+        "words": [
+          "EUPHONIUM",
+          "MERCURY",
+          "ORPHEUS",
+          "METALS"
+        ],
+        "difficulty": 3
+      },
+      {
+        "category": "CATEGORY 4 - Play puzzle to discover",
+        "words": [
+          "INDIUM",
+          "RUTHENIUM",
+          "TANTALUM",
+          "MUSICAL"
+        ],
+        "difficulty": 4
+      }
+    ],
+    "source": "Community puzzle: Very difficult #2",
+    "date": "2026-03-08"
   }
 ]
