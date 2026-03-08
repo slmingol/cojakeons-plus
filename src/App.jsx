@@ -130,6 +130,34 @@ function App() {
     }
   }, [mistakes, statsRecorded]);
 
+  // Close stats modal on Escape key
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && showStats) {
+        setShowStats(false);
+      }
+    };
+    
+    if (showStats) {
+      window.addEventListener('keydown', handleEscape);
+      return () => window.removeEventListener('keydown', handleEscape);
+    }
+  }, [showStats]);
+
+  // Close admin modal on Escape key
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && showAdmin) {
+        setShowAdmin(false);
+      }
+    };
+    
+    if (showAdmin) {
+      window.addEventListener('keydown', handleEscape);
+      return () => window.removeEventListener('keydown', handleEscape);
+    }
+  }, [showAdmin]);
+
   function shuffleArray(array) {
     const newArray = [...array];
     for (let i = newArray.length - 1; i > 0; i--) {
