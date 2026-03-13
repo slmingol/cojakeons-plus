@@ -25,7 +25,7 @@ npm install                # Install dependencies (React, Vite)
 npm run dev                # Start Vite dev server at localhost:3000
 
 # Docker development (hot reload)
-docker-compose -f docker-compose.dev.yml up
+podman compose -f docker-compose.dev.yml up
 ```
 
 **Dev Server**: Vite with HMR, polling enabled for Docker compatibility
@@ -37,8 +37,8 @@ npm run build              # Vite build → dist/ (~3-4s)
 npm run preview            # Preview production build locally
 
 # Docker production
-docker-compose up -d                           # Build and run with Nginx
-docker-compose -f docker-compose.prod.yml up -d  # Use prebuilt GHCR image
+podman compose up -d                           # Build and run with Nginx
+podman compose -f docker-compose.prod.yml up -d  # Use prebuilt GHCR image
 ```
 
 **Build Output**: Hashed assets in `dist/` (cache busting), sourcemaps disabled, Nginx serves static files
@@ -49,13 +49,13 @@ docker-compose -f docker-compose.prod.yml up -d  # Use prebuilt GHCR image
 docker pull ghcr.io/slmingol/conjakeions-plus:latest
 
 # Prebuilt production
-docker-compose -f docker-compose.prod.yml up -d
+podman compose -f docker-compose.prod.yml up -d
 
 # Build from source
-docker-compose up -d
+podman compose up -d
 
 # Development mode
-docker-compose -f docker-compose.dev.yml up
+podman compose -f docker-compose.dev.yml up
 ```
 
 ## Project Layout
@@ -140,7 +140,7 @@ conjakeions-plus/
 
 1. **Add/Edit Puzzles**: Modify `src/puzzles.json` (915+ puzzles, maintain structure)
 2. **Update Game Logic**: Edit `src/App.jsx` (selection, submission, shuffle, etc.)
-3. **Test Locally**: `npm run dev` or `docker-compose -f docker-compose.dev.yml up`
+3. **Test Locally**: `npm run dev` or `podman compose -f docker-compose.dev.yml up`
 4. **Commit**: Use conventional commit messages (`feat:`, `fix:`, `BREAKING CHANGE`) for auto-versioning
 5. **Push to Main**: Triggers auto-version → Docker build → Push to GHCR
 
@@ -161,18 +161,18 @@ conjakeions-plus/
 
 **Production (Prebuilt)**:
 ```bash
-docker-compose -f docker-compose.prod.yml pull  # Update to latest
-docker-compose -f docker-compose.prod.yml up -d
+podman compose -f docker-compose.prod.yml pull  # Update to latest
+podman compose -f docker-compose.prod.yml up -d
 ```
 
 **Production (Build from Source)**:
 ```bash
-docker-compose up -d --build
+podman compose up -d --build
 ```
 
 **Development**:
 ```bash
-docker-compose -f docker-compose.dev.yml up  # Hot reload on port 3000
+podman compose -f docker-compose.dev.yml up  # Hot reload on port 3000
 ```
 
 ## Documentation
