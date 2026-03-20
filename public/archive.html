@@ -165,12 +165,21 @@
             white-space: nowrap;
         }
 
-        .puzzle-categories {
-            font-size: 0.9rem;
-            color: #2d3748;
-            line-height: 1.4;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        .puzzle-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .difficulty-dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .difficulty-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
         }
 
         .puzzle-id {
@@ -179,11 +188,6 @@
             font-weight: 500;
             text-align: right;
             white-space: nowrap;
-        }
-
-        .status-icon {
-            margin-left: 5px;
-            font-size: 0.9rem;
         }
 
         .loading {
@@ -211,8 +215,13 @@
                 font-size: 0.8rem;
             }
 
-            .puzzle-categories {
-                font-size: 0.85rem;
+            .puzzle-info {
+                gap: 6px;
+            }
+
+            .difficulty-dot {
+                width: 8px;
+                height: 8px;
             }
 
             .puzzle-id {
@@ -292,7 +301,7 @@
                 type="text" 
                 id="search-input" 
                 class="search-input" 
-                placeholder="Search categories..."
+                placeholder="Search by date or puzzle #..."
             >
         </div>
 
@@ -392,10 +401,10 @@
             // Apply search filter
             if (searchTerm) {
                 filteredPuzzles = filteredPuzzles.filter(puzzle => {
-                    const categoryNames = puzzle.categories.map(c => c.name.toLowerCase()).join(' ');
-                    return categoryNames.includes(searchTerm) || 
-                           puzzle.date.includes(searchTerm) ||
-                           puzzle.id.toString().includes(searchTerm);
+                    return (
+                        puzzle.date.includes(searchTerm) ||
+                        puzzle.id.toString().includes(searchTerm)
+                    );
                 });
             }
 
@@ -438,15 +447,22 @@
                 const completed = history && history.completions > 0;
                 const won = history && history.wins > 0;
 
-                const statusIcon = completed ? (won ? '✓' : '✗') : (attempted ? '↻' : '');
-                const categories = puzzle.categories.map(c => c.name).join(' • ');
+                const statusIcon = completed ? (won ? '✅' : '❌') : (attempted ? '🔄' : '');
+                
+                // Get difficulty colors from categories (sorted by difficulty)
+                const sortedCategories = [...puzzle.categories].sort((a, b) => a.difficulty - b.difficulty);
+                const difficultyDots = sortedCategories.map(cat => 
+                    `<div class="difficulty-dot" style="background-color: ${cat.color};" title="Difficulty ${cat.difficulty}"></div>`
+                ).join('');
                 
                 return `
                     <div class="puzzle-row" onclick="openPuzzle(${puzzle.id})">
                         <div class="puzzle-date">
-                            ${formatDate(puzzle.date)}${statusIcon ? `<span class="status-icon">${statusIcon}</span>` : ''}
+                            ${formatDate(puzzle.date)} ${statusIcon}
                         </div>
-                        <div class="puzzle-categories">${categories}</div>
+                        <div class="puzzle-info">
+                            <div class="difficulty-dots">${difficultyDots}</div>
+                        </div>
                         <div class="puzzle-id">#${puzzle.id}</div>
                     </div>
                 `;
