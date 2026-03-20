@@ -93,28 +93,6 @@
   width: auto;
 }
 
-.archive-link {
-  margin-left: auto;
-  padding: 0.5rem 1rem;
-  background-color: var(--button-bg);
-  color: var(--text-primary);
-  text-decoration: none;
-  border-radius: 8px;
-  border: 2px solid var(--border-color);
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.archive-link:hover {
-  background-color: var(--button-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
 .header h1 {
   font-size: 2.5rem;
   font-weight: 700;
@@ -417,11 +395,32 @@
   cursor: pointer;
   transition: all 0.15s ease;
   white-space: nowrap;
-  grid-column: 3;
-  justify-self: end;
 }
 
 .stats-button-inline:hover {
+  background-color: #4a4940;
+  border-color: #4a4940;
+}
+
+.archive-button-inline {
+  background-color: #5a594e;
+  color: white;
+  border: 1px solid #5a594e;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+}
+
+.archive-button-inline:hover {
   background-color: #4a4940;
   border-color: #4a4940;
 }
@@ -629,6 +628,11 @@
   .stats-button-inline {
     padding: 0.3rem 0.5rem;
     font-size: 0.8rem;
+  }
+  .archive-button-inline {
+    padding: 0.3rem 0.5rem;
+    font-size: 1rem;
+    min-width: 34px;
   }
   .footer {
     font-size: 0.65rem;

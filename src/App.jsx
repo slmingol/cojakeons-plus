@@ -340,9 +340,6 @@ function App() {
         <div className="header-title">
           <img src="/logo.png" alt="Conjakeions+ Logo" className="logo" />
           <h1>Conjakeions+</h1>
-          <a href="/archive.html" className="archive-link" title="View all puzzles">
-            📚 Archive
-          </a>
         </div>
         <p className="current-date">
           {new Date().toLocaleDateString('en-US', { 
@@ -466,12 +463,17 @@ function App() {
                 ))}
               </div>
             </div>
-            <button 
-              onClick={() => setShowStats(true)}
-              className="stats-button-inline"
-            >
-              📊 Stats
-            </button>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <a href="/archive.html" className="stats-button-inline archive-button-inline" title="View all puzzles">
+                📚
+              </a>
+              <button 
+                onClick={() => setShowStats(true)}
+                className="stats-button-inline"
+              >
+                📊 Stats
+              </button>
+            </div>
           </div>
         )}
 
