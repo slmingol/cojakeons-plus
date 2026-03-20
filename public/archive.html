@@ -444,8 +444,9 @@
             <div class="page-size-selector">
                 <label for="page-size">Per page:</label>
                 <select id="page-size">
+                    <option value="10" selected>10</option>
                     <option value="50">50</option>
-                    <option value="100" selected>100</option>
+                    <option value="100">100</option>
                     <option value="200">200</option>
                     <option value="500">500</option>
                     <option value="all">All</option>
@@ -495,7 +496,7 @@
         let filteredPuzzles = [];
         let puzzleHistory = {};
         let currentPage = 1;
-        let pageSize = 100;
+        let pageSize = 10;
 
         const PUZZLE_HISTORY_KEY = 'conjakeions-plus-puzzle-history';
 
