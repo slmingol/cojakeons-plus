@@ -103,6 +103,7 @@
         .stats {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 40px;
             margin-bottom: 30px;
             flex-wrap: wrap;
@@ -110,6 +111,32 @@
 
         .stat {
             text-align: center;
+        }
+
+        .stat-button {
+            padding: 10px 20px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .stat-button:hover {
+            background: var(--text-secondary);
+        }
+
+        .stat-button.secondary {
+            background: var(--text-secondary);
+        }
+
+        .stat-button.secondary:hover {
+            background: #4a4940;
         }
 
         .stat-value {
@@ -378,13 +405,10 @@
         <div class="header">
             <h1>🧩 Puzzle Archive</h1>
             <p>Browse all <span id="total-count">0</span> puzzles</p>
-            <div class="header-actions">
-                <a href="/" class="btn">← Back to Game</a>
-                <button id="random-btn" class="btn btn-secondary">🎲 Random Puzzle</button>
-            </div>
         </div>
 
         <div class="stats">
+            <a href="/" class="stat-button">← Back to Game</a>
             <div class="stat">
                 <div class="stat-value" id="total-puzzles">0</div>
                 <div class="stat-label">Total Puzzles</div>
@@ -397,6 +421,7 @@
                 <div class="stat-value" id="completed-count">0</div>
                 <div class="stat-label">Completed</div>
             </div>
+            <button id="random-btn" class="stat-button secondary">🎲 Random Puzzle</button>
         </div>
 
         <div class="filters">
