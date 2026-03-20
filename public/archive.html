@@ -141,9 +141,9 @@
 
         .puzzle-row {
             display: grid;
-            grid-template-columns: 120px 1fr auto;
-            gap: 20px;
-            padding: 15px 20px;
+            grid-template-columns: 110px 1fr 80px;
+            gap: 15px;
+            padding: 12px 20px;
             border-bottom: 1px solid #e2e8f0;
             cursor: pointer;
             transition: background 0.2s;
@@ -162,27 +162,28 @@
             font-weight: 600;
             color: #5a67d8;
             font-size: 0.9rem;
+            white-space: nowrap;
         }
 
         .puzzle-categories {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .category-tag {
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 500;
+            font-size: 0.9rem;
             color: #2d3748;
-            background: #edf2f7;
+            line-height: 1.4;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .puzzle-id {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #718096;
             font-weight: 500;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .status-icon {
+            margin-left: 5px;
+            font-size: 0.9rem;
         }
 
         .loading {
@@ -200,16 +201,22 @@
 
         @media (max-width: 768px) {
             .puzzle-row {
-                grid-template-columns: 1fr;
+                grid-template-columns: 85px 1fr 60px;
                 gap: 10px;
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            .puzzle-date {
+                font-size: 0.8rem;
             }
 
             .puzzle-categories {
-                order: 2;
+                font-size: 0.85rem;
             }
 
             .puzzle-id {
-                text-align: right;
+                font-size: 0.75rem;
             }
 
             .filters {
@@ -224,6 +231,14 @@
 
             .search-input {
                 width: 100%;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .stats {
+                gap: 20px;
             }
         }
     </style>
@@ -424,19 +439,15 @@
                 const won = history && history.wins > 0;
 
                 const statusIcon = completed ? (won ? '✓' : '✗') : (attempted ? '↻' : '');
+                const categories = puzzle.categories.map(c => c.name).join(' • ');
                 
                 return `
                     <div class="puzzle-row" onclick="openPuzzle(${puzzle.id})">
                         <div class="puzzle-date">
-                            ${formatDate(puzzle.date)}
-                            ${statusIcon ? `<span style="margin-left: 5px;">${statusIcon}</span>` : ''}
+                            ${formatDate(puzzle.date)}${statusIcon ? `<span class="status-icon">${statusIcon}</span>` : ''}
                         </div>
-                        <div class="puzzle-categories">
-                            ${puzzle.categories.map(cat => 
-                                `<span class="category-tag">${cat.name}</span>`
-                            ).join('')}
-                        </div>
-                        <div class="puzzle-id">Puzzle #${puzzle.id}</div>
+                        <div class="puzzle-categories">${categories}</div>
+                        <div class="puzzle-id">#${puzzle.id}</div>
                     </div>
                 `;
             }).join('');
@@ -449,9 +460,9 @@
             try {
                 const date = new Date(dateStr);
                 return date.toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    year: 'numeric'
+                    month: '2-digit',
+                    day: '2-digit',
+                    year: '2-digit'
                 });
             } catch {
                 return dateStr;
