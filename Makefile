@@ -1,4 +1,4 @@
-.PHONY: help count list incomplete summary progress scrape resume
+.PHONY: help count list incomplete summary progress scrape resume retry retry-missing
 
 help:
 	@echo "Available commands:"
@@ -9,6 +9,8 @@ help:
 	@echo "  make progress    - Check current scraper progress"
 	@echo "  make scrape      - Run scraper for N days (default: 20)"
 	@echo "  make resume      - Auto-resume from oldest puzzle (default: 300 days)"
+	@echo "  make retry IDS='881 883' - Retry specific puzzle IDs"
+	@echo "  make retry-missing - Auto-detect and retry all missing puzzles"
 
 count:
 	@jq '.puzzles | length' data/collected-puzzles.json
@@ -38,3 +40,9 @@ scrape:
 
 resume:
 	@bash scripts/resume-scraper.sh $(or $(DAYS),300)
+
+retry:
+	@node scripts/retry-puzzles.js $(IDS)
+
+retry-missing:
+	@node scripts/retry-missing.js
