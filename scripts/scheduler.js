@@ -7,7 +7,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { getTodaysPuzzle, addToCollection } from './daily-scraper.js';
+import { spawn } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -76,35 +76,43 @@ function shouldRun() {
 
 // Run the scraper
 async function runScraper() {
-    try {
+    return new Promise((resolve) => {
         console.log(`[${new Date().toISOString()}] Running scheduled scrape...`);
         
-        const puzzleData = await getTodaysPuzzle();
+        const scraperPath = path.join(__dirname, 'daily-scraper.js');
+        const scraper = spawn('node', [scraperPath, '0'], {
+            stdio: 'inherit',
+            cwd: path.join(__dirname, '..')
+        });
         
-        if (puzzleData) {
-            const added = addToCollection(puzzleData);
-            
-            if (added) {
+        scraper.on('close', (code) => {
+            if (code === 0) {
                 state.consecutiveErrors = 0;
-                console.log('[Scheduler] Successfully added new puzzle');
+                console.log('[Scheduler] Scrape completed successfully');
             } else {
-                console.log('[Scheduler] Puzzle already in collection');
+                console.error(`[Scheduler] Scrape failed with exit code ${code}`);
+                state.consecutiveErrors++;
+                state.totalErrors++;
             }
-        } else {
-            console.log('[Scheduler] No puzzle data retrieved');
-        }
+            
+            state.lastRun = new Date().toISOString();
+            state.checksToday++;
+            state.totalRuns++;
+            saveState();
+            resolve();
+        });
         
-        state.lastRun = new Date().toISOString();
-        state.checksToday++;
-        state.totalRuns++;
-        saveState();
-        
-    } catch (err) {
-        console.error('[Scheduler] Error during scrape:', err.message);
-        state.consecutiveErrors++;
-        state.totalErrors++;
-        saveState();
-    }
+        scraper.on('error', (err) => {
+            console.error('[Scheduler] Error spawning scraper:', err.message);
+            state.consecutiveErrors++;
+            state.totalErrors++;
+            state.lastRun = new Date().toISOString();
+            state.checksToday++;
+            state.totalRuns++;
+            saveState();
+            resolve();
+        });
+    });
 }
 
 // Main scheduler loop
