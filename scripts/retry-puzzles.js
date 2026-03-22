@@ -4,8 +4,15 @@
  * Usage: node retry-puzzles.js 881 883 904 916
  */
 
-import { chromium } from 'playwright';
+import fs from 'fs';
+import path from 'path';
 import { spawn } from 'child_process';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const COLLECTION_FILE = path.join(__dirname, '../data/collected-puzzles.json');
 
 const puzzleIds = process.argv.slice(2).map(Number);
 
@@ -15,14 +22,15 @@ if (puzzleIds.length === 0) {
     process.exit(1);
 }
 
-async function getTodaysPuzzleNumber() {
-    const browser = await chromium.launch({ headless: true });
-    const page = await browser.newPage();
-    await page.goto('https://connectionsplus.io/nyt-archive');
-    const bodyText = await page.textContent('body');
-    const match = bodyText.match(/Connections #(\d+)/);
-    await browser.close();
-    return match ? parseInt(match[1]) : null;
+function getReferenceId() {
+    try {
+        const data = JSON.parse(fs.readFileSync(COLLECTION_FILE, 'utf8'));
+        const ids = data.puzzles.map(p => p.id).sort((a, b) => a - b);
+        return ids[ids.length - 1] + 1; // max + 1
+    } catch (err) {
+        console.error('Error reading collection:', err.message);
+        return null;
+    }
 }
 
 async function retryPuzzle(puzzleId, today) {
@@ -52,27 +60,26 @@ async function retryPuzzle(puzzleId, today) {
 }
 
 async function main() {
-    console.log('Fetching current puzzle number...');
-    const today = await getTodaysPuzzleNumber();
+    const referenceId = getReferenceId();
     
-    if (!today) {
-        console.error('Failed to detect current puzzle number');
+    if (!referenceId) {
+        console.error('Failed to get reference puzzle number from collection');
         process.exit(1);
     }
     
-    console.log(`Current puzzle: #${today}`);
+    console.log(`Using puzzle #${referenceId} as reference (max collected + 1)`);
     console.log(`Retrying ${puzzleIds.length} puzzle(s): ${puzzleIds.join(', ')}`);
     
     let successCount = 0;
     let failCount = 0;
     
     for (const puzzleId of puzzleIds) {
-        if (puzzleId > today) {
-            console.log(`⚠ Skipping #${puzzleId} (future puzzle)`);
+        if (puzzleId >= referenceId) {
+            console.log(`⚠ Skipping #${puzzleId} (not yet available or already collected)`);
             continue;
         }
         
-        const code = await retryPuzzle(puzzleId, today);
+        const code = await retryPuzzle(puzzleId, referenceId);
         
         if (code === 0) {
             successCount++;

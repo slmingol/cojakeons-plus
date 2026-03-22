@@ -6,7 +6,6 @@
 
 import fs from 'fs';
 import path from 'path';
-import { chromium } from 'playwright';
 import { spawn } from 'child_process';
 import { fileURLToPath } from 'url';
 
@@ -39,16 +38,6 @@ function findMissingIds(collectedIds) {
     }
     
     return missing;
-}
-
-async function getTodaysPuzzleNumber() {
-    const browser = await chromium.launch({ headless: true });
-    const page = await browser.newPage();
-    await page.goto('https://connectionsplus.io/nyt-archive');
-    const bodyText = await page.textContent('body');
-    const match = bodyText.match(/Connections #(\d+)/);
-    await browser.close();
-    return match ? parseInt(match[1]) : null;
 }
 
 async function retryPuzzle(puzzleId, today) {
@@ -97,23 +86,17 @@ async function main() {
     }
     
     console.log(`Found ${missingIds.length} missing puzzle(s): ${missingIds.join(', ')}`);
-    console.log('\nFetching current puzzle number...');
     
-    const today = await getTodaysPuzzleNumber();
-    
-    if (!today) {
-        console.error('Failed to detect current puzzle number');
-        process.exit(1);
-    }
-    
-    console.log(`Current puzzle: #${today}`);
-    console.log(`\nRetrying ${missingIds.length} missing puzzle(s)...`);
+    // Use max collected ID + 1 as approximation of today's puzzle for calculating days ago
+    const referenceId = collectedIds[collectedIds.length - 1] + 1;
+    console.log(`\nUsing puzzle #${referenceId} as reference (max + 1) for calculating days ago`);
+    console.log(`Retrying ${missingIds.length} missing puzzle(s)...`);
     
     let successCount = 0;
     let failCount = 0;
     
     for (const puzzleId of missingIds) {
-        const code = await retryPuzzle(puzzleId, today);
+        const code = await retryPuzzle(puzzleId, referenceId);
         
         if (code === 0) {
             successCount++;
