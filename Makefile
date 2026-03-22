@@ -1,4 +1,4 @@
-.PHONY: help count list incomplete summary progress gaps scrape resume retry retry-missing
+.PHONY: help count list incomplete summary progress gaps scrape resume retry retry-missing manual
 
 help:
 	@echo "Available commands:"
@@ -12,6 +12,7 @@ help:
 	@echo "  make resume      - Auto-resume from oldest puzzle (default: 300 days)"
 	@echo "  make retry IDS='881 883' - Retry specific puzzle IDs"
 	@echo "  make retry-missing - Auto-detect and retry all missing puzzles"
+	@echo "  make manual      - Manually enter a puzzle (interactive)"
 
 count:
 	@jq '.puzzles | length' data/collected-puzzles.json
@@ -34,7 +35,7 @@ progress:
 	@echo "Puzzle range: $$(jq -r '.puzzles | sort_by(.id) | [.[0].id, .[-1].id] | "First: \(.[0]), Last: \(.[1])"' data/collected-puzzles.json)"
 	@echo ""
 	@echo "Running scrapers:"
-	@pgrep -af "daily-scraper" || echo "No scrapers running"
+	@pgrep -fl "node.*scripts/(daily-scraper|resume-scraper|scrape-range)" || echo "No scrapers running"
 
 gaps:
 	@echo "Analyzing collection for missing puzzles..."
@@ -66,3 +67,6 @@ retry:
 
 retry-missing:
 	@node scripts/retry-missing.js
+
+manual:
+	@node scripts/manual-puzzle-entry.js
