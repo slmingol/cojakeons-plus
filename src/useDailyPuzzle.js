@@ -1,33 +1,41 @@
 import { useState, useEffect } from 'react';
 
-// Reference date: the date when puzzle index 0 was the daily puzzle
-// You can adjust this to any date you want as the starting point
-const REFERENCE_DATE = new Date('2024-01-01');
-const REFERENCE_PUZZLE_INDEX = 0;
-
 /**
- * Calculate the daily puzzle index based on the current date
- * Each day advances the puzzle by 1
+ * Find the daily puzzle index by matching today's date with puzzle dates
+ * Returns the puzzle that matches today's date, or the most recent puzzle if none match
  */
-export const getDailyPuzzleIndex = (totalPuzzles) => {
+export const getDailyPuzzleIndex = (puzzles) => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+  const todayStr = today.toISOString().split('T')[0]; // YYYY-MM-DD format
   
-  const refDate = new Date(REFERENCE_DATE);
-  refDate.setHours(0, 0, 0, 0);
+  // Try to find exact date match
+  const exactMatch = puzzles.findIndex(p => p.date === todayStr);
+  if (exactMatch !== -1) {
+    return exactMatch;
+  }
   
-  const daysDiff = Math.floor((today - refDate) / (1000 * 60 * 60 * 24));
-  const puzzleIndex = (REFERENCE_PUZZLE_INDEX + daysDiff) % totalPuzzles;
+  // If no exact match, find the most recent puzzle (latest date <= today)
+  let latestIndex = 0;
+  let latestDate = new Date(puzzles[0].date);
   
-  return puzzleIndex >= 0 ? puzzleIndex : totalPuzzles + puzzleIndex;
+  for (let i = 1; i < puzzles.length; i++) {
+    const puzzleDate = new Date(puzzles[i].date);
+    if (puzzleDate <= today && puzzleDate > latestDate) {
+      latestDate = puzzleDate;
+      latestIndex = i;
+    }
+  }
+  
+  return latestIndex;
 };
 
 /**
  * Hook to manage daily puzzle state
  */
-export const useDailyPuzzle = (totalPuzzles) => {
+export const useDailyPuzzle = (puzzles) => {
   const [dailyPuzzleIndex, setDailyPuzzleIndex] = useState(() => 
-    getDailyPuzzleIndex(totalPuzzles)
+    getDailyPuzzleIndex(puzzles)
   );
   const [isPlayingDaily, setIsPlayingDaily] = useState(true);
 
@@ -41,16 +49,16 @@ export const useDailyPuzzle = (totalPuzzles) => {
     const msUntilMidnight = tomorrow - now;
     
     const timer = setTimeout(() => {
-      setDailyPuzzleIndex(getDailyPuzzleIndex(totalPuzzles));
+      setDailyPuzzleIndex(getDailyPuzzleIndex(puzzles));
       // Reload the page to reset the game at midnight
       window.location.reload();
     }, msUntilMidnight);
     
     return () => clearTimeout(timer);
-  }, [totalPuzzles]);
+  }, [puzzles]);
 
   const returnToDaily = () => {
-    setDailyPuzzleIndex(getDailyPuzzleIndex(totalPuzzles));
+    setDailyPuzzleIndex(getDailyPuzzleIndex(puzzles));
     setIsPlayingDaily(true);
     return dailyPuzzleIndex;
   };

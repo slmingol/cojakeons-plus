@@ -18,7 +18,7 @@ function App() {
   const { savedState, saveState, clearState } = useGameState();
   const { recordAttempt, recordCompletion, getPuzzleStats, hasPlayedBefore, hasWonBefore, getTotalPuzzlesAttempted, getTotalPuzzlesWon, resetHistory } = usePuzzleHistory();
   const { theme, setTheme } = useTheme();
-  const { dailyPuzzleIndex, isPlayingDaily, returnToDaily, setBrowseMode } = useDailyPuzzle(puzzlesData.length);
+  const { dailyPuzzleIndex, isPlayingDaily, returnToDaily, setBrowseMode } = useDailyPuzzle(puzzlesData);
   
   // Initialize with daily puzzle if no saved state, otherwise use saved state
   const initialPuzzleIndex = savedState.currentPuzzleIndex !== 0 || savedState.solved.length > 0 || savedState.mistakes > 0

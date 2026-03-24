@@ -662,7 +662,7 @@ if (isMainModule) {
             
             if (added) {
                 console.log('\n✓ Added to collected-puzzles.json');
-                console.log('Run "npm run merge" to add to main puzzle collection');
+                console.log('Note: Run "node scripts/process-scraped-data.js" to update app puzzle files');
             }
             
             process.exit(0);
