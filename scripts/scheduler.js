@@ -74,66 +74,36 @@ function shouldRun() {
     return isCheckTime;
 }
 
-// Run the scraper and process data
+// Run the auto-backfill to ensure last 7 days are complete
 async function runScraper() {
     return new Promise((resolve) => {
-        console.log(`[${new Date().toISOString()}] Running scheduled scrape...`);
+        console.log(`[${new Date().toISOString()}] Running scheduled auto-backfill...`);
         
-        const scraperPath = path.join(__dirname, 'daily-scraper.js');
-        const scraper = spawn('node', [scraperPath, '0'], {
+        const backfillPath = path.join(__dirname, 'auto-backfill.js');
+        const backfill = spawn('node', [backfillPath], {
             stdio: 'inherit',
             cwd: path.join(__dirname, '..')
         });
         
-        scraper.on('close', (code) => {
+        backfill.on('close', (code) => {
             if (code === 0) {
                 state.consecutiveErrors = 0;
-                console.log('[Scheduler] Scrape completed successfully');
-                
-                // Process the scraped data to update app puzzle files
-                console.log('[Scheduler] Processing scraped data...');
-                const processorPath = path.join(__dirname, 'process-scraped-data.js');
-                const processor = spawn('node', [processorPath], {
-                    stdio: 'inherit',
-                    cwd: path.join(__dirname, '..')
-                });
-                
-                processor.on('close', (processCode) => {
-                    if (processCode === 0) {
-                        console.log('[Scheduler] Data processing completed successfully');
-                    } else {
-                        console.error(`[Scheduler] Data processing failed with exit code ${processCode}`);
-                    }
-                    
-                    state.lastRun = new Date().toISOString();
-                    state.checksToday++;
-                    state.totalRuns++;
-                    saveState();
-                    resolve();
-                });
-                
-                processor.on('error', (err) => {
-                    console.error('[Scheduler] Error processing data:', err.message);
-                    state.lastRun = new Date().toISOString();
-                    state.checksToday++;
-                    state.totalRuns++;
-                    saveState();
-                    resolve();
-                });
+                console.log('[Scheduler] Auto-backfill completed successfully');
             } else {
-                console.error(`[Scheduler] Scrape failed with exit code ${code}`);
+                console.error(`[Scheduler] Auto-backfill failed with exit code ${code}`);
                 state.consecutiveErrors++;
                 state.totalErrors++;
-                state.lastRun = new Date().toISOString();
-                state.checksToday++;
-                state.totalRuns++;
-                saveState();
-                resolve();
             }
+            
+            state.lastRun = new Date().toISOString();
+            state.checksToday++;
+            state.totalRuns++;
+            saveState();
+            resolve();
         });
         
-        scraper.on('error', (err) => {
-            console.error('[Scheduler] Error spawning scraper:', err.message);
+        backfill.on('error', (err) => {
+            console.error('[Scheduler] Error spawning auto-backfill:', err.message);
             state.consecutiveErrors++;
             state.totalErrors++;
             state.lastRun = new Date().toISOString();

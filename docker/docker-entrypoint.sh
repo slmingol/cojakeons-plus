@@ -11,6 +11,12 @@ if [ -f /usr/share/nginx/html/version.txt ]; then
     echo ""
 fi
 
+# Run auto-backfill to ensure last 7 days are present
+echo "🔄 Checking for missing puzzles (last 7 days)..."
+cd /app
+node scripts/auto-backfill.js || echo "⚠️  Auto-backfill had issues, continuing anyway..."
+echo ""
+
 # Start the puzzle scheduler in the background
 echo "🤖 Starting puzzle collection scheduler..."
 cd /app
