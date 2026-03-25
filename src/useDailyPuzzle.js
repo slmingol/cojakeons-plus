@@ -1,6 +1,19 @@
 import { useState, useEffect } from 'react';
 
 /**
+ * Normalize date to YYYY-MM-DD format for comparison
+ */
+const normalizeDate = (dateStr) => {
+  try {
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return dateStr;
+    return date.toISOString().split('T')[0];
+  } catch {
+    return dateStr;
+  }
+};
+
+/**
  * Find the daily puzzle index by matching today's date with puzzle dates
  * Returns the puzzle that matches today's date, or the most recent puzzle if none match
  */
@@ -9,8 +22,8 @@ export const getDailyPuzzleIndex = (puzzles) => {
   today.setHours(0, 0, 0, 0);
   const todayStr = today.toISOString().split('T')[0]; // YYYY-MM-DD format
   
-  // Try to find exact date match
-  const exactMatch = puzzles.findIndex(p => p.date === todayStr);
+  // Try to find exact date match (normalize puzzle dates for comparison)
+  const exactMatch = puzzles.findIndex(p => normalizeDate(p.date) === todayStr);
   if (exactMatch !== -1) {
     return exactMatch;
   }
